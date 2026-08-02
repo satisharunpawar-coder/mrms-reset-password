@@ -8,10 +8,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://https://jwfddupnaefqubjeimux.supabase.co"
+const SUPABASE_URL = "https://jwfddupnaefqubjeimux.supabase.co"
 const SUPABASE_ANON_KEY = "sb_publishable_d-ZyYxPlegxRbN3wAWnOAg_h9oA-eb1";
 
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
 );
@@ -100,7 +100,7 @@ Reset Password
 <script>
 
 async function resetPassword(){
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
 
 if (!session) {
     document.getElementById("message").style.color = "red";
@@ -119,7 +119,7 @@ message.innerHTML="Passwords do not match.";
 return;
 }
 
-const {error}=await supabase.auth.updateUser({
+const {error}=await supabaseClient.auth.updateUser({
 password:password
 });
 
